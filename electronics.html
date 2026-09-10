@@ -1,0 +1,1522 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEasy - Electronics</title>
+
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           PAGE
+        ====================================================== */
+
+        .electronics-page {
+            padding: 45px 0 70px;
+        }
+
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+
+        .page-header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+
+        .page-header p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           TOOLBAR
+        ====================================================== */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+
+        .category-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+
+        .filter-btn {
+            border: 1px solid #d1d5db;
+            background: white;
+            color: #374151;
+            padding: 9px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: white;
+        }
+
+
+        .search-sort {
+            display: flex;
+            gap: 10px;
+        }
+
+
+        .product-search {
+            width: 220px;
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+        }
+
+
+        .product-search:focus {
+            border-color: #2563eb;
+        }
+
+
+        .sort-select {
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            outline: none;
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           PRODUCTS GRID
+        ====================================================== */
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: 0.3s;
+            position: relative;
+        }
+
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+
+        /* =====================================================
+           PRODUCT IMAGE
+        ====================================================== */
+
+        .product-image-box {
+            height: 230px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+
+        .product-card:hover
+        .product-image-box img {
+            transform: scale(1.05);
+        }
+
+
+        /* =====================================================
+           SALE BADGE
+        ====================================================== */
+
+        .sale-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #dc2626;
+            color: white;
+            padding: 5px 9px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           WISHLIST
+        ====================================================== */
+
+        .wishlist {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            background: white;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            z-index: 3;
+        }
+
+
+        .wishlist:hover {
+            color: #dc2626;
+        }
+
+
+        .wishlist.active {
+            color: #dc2626;
+        }
+
+
+        /* =====================================================
+           PRODUCT DETAILS
+        ====================================================== */
+
+        .product-details {
+            padding: 18px;
+        }
+
+
+        .product-details h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+            color: #111827;
+        }
+
+
+        .product-category {
+            color: #6b7280;
+            font-size: 12px;
+            text-transform: capitalize;
+            margin-bottom: 8px;
+        }
+
+
+        .rating {
+            color: #f59e0b;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+
+        .price {
+            color: #2563eb;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+
+        .old-price {
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           ADD CART
+        ====================================================== */
+
+        .add-cart {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            background: #2563eb;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+
+        .add-cart:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =====================================================
+           NO PRODUCTS
+        ====================================================== */
+
+        .no-products {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+            grid-column: 1 / -1;
+        }
+
+
+        .no-products-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+
+        .no-products p {
+            color: #6b7280;
+        }
+
+
+        /* =====================================================
+           NOTIFICATION
+        ====================================================== */
+
+        #notification {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #111827;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 10px;
+            z-index: 99999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.3s;
+            font-size: 14px;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+
+        #notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 1100px) {
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+
+        @media (max-width: 850px) {
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+
+            .search-sort {
+                width: 100%;
+            }
+
+
+            .product-search {
+                flex: 1;
+                width: auto;
+            }
+        }
+
+
+        @media (max-width: 550px) {
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+
+            .search-sort {
+                flex-direction: column;
+            }
+
+
+            .product-search,
+            .sort-select {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<nav class="navbar">
+
+
+    <a href="index.html"
+       class="logo">
+
+        ShopEasy
+
+    </a>
+
+
+    <div class="nav-links">
+
+
+        <a href="index.html">
+            Home
+        </a>
+
+
+        <a href="categories.html">
+            Categories
+        </a>
+
+
+        <a href="electronics.html"
+           class="active">
+
+            Electronics
+
+        </a>
+
+
+        <a href="fashion.html">
+            Fashion
+        </a>
+
+
+        <a href="footwear.html">
+            Footwear
+        </a>
+
+
+        <a href="login.html">
+            Account
+        </a>
+
+
+        <a href="cart.html"
+           class="cart-link">
+
+            🛒
+
+            <span
+                class="cart-count"
+                id="cartCount">
+
+                0
+
+            </span>
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="electronics-page">
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="page-header">
+
+            <h1>
+                Electronics
+            </h1>
+
+            <p>
+                Discover the latest electronics
+                at amazing prices
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="toolbar">
+
+
+            <div class="category-filters">
+
+
+                <button
+                    class="filter-btn active"
+                    onclick="filterProducts('all', this)">
+
+                    All
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('smartphones', this)">
+
+                    Smartphones
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('laptops', this)">
+
+                    Laptops
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('headphones', this)">
+
+                    Headphones
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('smartwatches', this)">
+
+                    Smart Watches
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('tablets', this)">
+
+                    Tablets
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('cameras', this)">
+
+                    Cameras
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    onclick="filterProducts('gaming', this)">
+
+                    Gaming
+
+                </button>
+
+
+            </div>
+
+
+
+            <div class="search-sort">
+
+
+                <input
+                    type="text"
+                    id="productSearch"
+                    class="product-search"
+                    placeholder="Search electronics..."
+                    oninput="searchProducts()">
+
+
+                <select
+                    id="sortSelect"
+                    class="sort-select"
+                    onchange="sortProducts()">
+
+
+                    <option value="default">
+                        Sort By
+                    </option>
+
+
+                    <option value="low">
+                        Price: Low to High
+                    </option>
+
+
+                    <option value="high">
+                        Price: High to Low
+                    </option>
+
+
+                    <option value="rating">
+                        Top Rated
+                    </option>
+
+
+                    <option value="name">
+                        Name A-Z
+                    </option>
+
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCTS
+        ================================================== -->
+
+        <div
+            class="products-grid"
+            id="productsGrid">
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- NOTIFICATION -->
+
+<div id="notification"></div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =========================================================
+   PRODUCT DATABASE
+========================================================= */
+
+const products = [
+
+    {
+        id: "e1",
+        name: "iPhone 16",
+        price: 79999,
+        oldPrice: 84999,
+        image: "images/iphone16.jpg",
+        category: "smartphones",
+        rating: 4.8
+    },
+
+    {
+        id: "e2",
+        name: "Samsung Galaxy S25",
+        price: 74999,
+        oldPrice: 79999,
+        image: "images/galaxy-s25.jpg",
+        category: "smartphones",
+        rating: 4.7
+    },
+
+    {
+        id: "e3",
+        name: "MacBook Air M3",
+        price: 99999,
+        oldPrice: 109999,
+        image: "images/macbook-air.jpg",
+        category: "laptops",
+        rating: 4.9
+    },
+
+    {
+        id: "e4",
+        name: "HP Pavilion",
+        price: 64999,
+        oldPrice: 69999,
+        image: "images/hp-pavilion.jpg",
+        category: "laptops",
+        rating: 4.5
+    },
+
+    {
+        id: "e5",
+        name: "Sony WH-1000XM5",
+        price: 29999,
+        oldPrice: 34999,
+        image: "images/sony-xm5.jpg",
+        category: "headphones",
+        rating: 4.8
+    },
+
+    {
+        id: "e6",
+        name: "AirPods Pro",
+        price: 24999,
+        oldPrice: 26999,
+        image: "images/airpods-pro.jpg",
+        category: "headphones",
+        rating: 4.7
+    },
+
+    {
+        id: "e7",
+        name: "Apple Watch Series 10",
+        price: 46999,
+        oldPrice: 49999,
+        image: "images/apple-watch.jpg",
+        category: "smartwatches",
+        rating: 4.8
+    },
+
+    {
+        id: "e8",
+        name: "Samsung Galaxy Watch",
+        price: 29999,
+        oldPrice: 32999,
+        image: "images/galaxy-watch.jpg",
+        category: "smartwatches",
+        rating: 4.5
+    },
+
+    {
+        id: "e9",
+        name: "iPad Air",
+        price: 59999,
+        oldPrice: 64999,
+        image: "images/ipad-air.jpg",
+        category: "tablets",
+        rating: 4.8
+    },
+
+    {
+        id: "e10",
+        name: "Samsung Galaxy Tab",
+        price: 42999,
+        oldPrice: 47999,
+        image: "images/galaxy-tab.jpg",
+        category: "tablets",
+        rating: 4.5
+    },
+
+    {
+        id: "e11",
+        name: "Canon EOS Camera",
+        price: 69999,
+        oldPrice: 74999,
+        image: "images/canon-camera.jpg",
+        category: "cameras",
+        rating: 4.7
+    },
+
+    {
+        id: "e12",
+        name: "Sony Mirrorless Camera",
+        price: 89999,
+        oldPrice: 94999,
+        image: "images/sony-camera.jpg",
+        category: "cameras",
+        rating: 4.8
+    },
+
+    {
+        id: "e13",
+        name: "PlayStation 5",
+        price: 54999,
+        oldPrice: 59999,
+        image: "images/ps5.jpg",
+        category: "gaming",
+        rating: 4.9
+    },
+
+    {
+        id: "e14",
+        name: "Xbox Series X",
+        price: 49999,
+        oldPrice: 54999,
+        image: "images/xbox-series-x.jpg",
+        category: "gaming",
+        rating: 4.8
+    }
+
+];
+
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+let currentCategory = "all";
+
+let currentSearch = "";
+
+let currentSort = "default";
+
+
+
+/* =========================================================
+   GET CART
+========================================================= */
+
+function getCart() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart(cart) {
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    updateCartCount();
+
+}
+
+
+
+/* =========================================================
+   CART COUNT
+========================================================= */
+
+function updateCartCount() {
+
+    const cart = getCart();
+
+    const count = cart.reduce(
+        (total, item) => {
+
+            return total +
+                Number(item.quantity || 1);
+
+        },
+        0
+    );
+
+
+    const cartCount =
+        document.getElementById(
+            "cartCount"
+        );
+
+
+    if (cartCount) {
+
+        cartCount.textContent =
+            count;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ADD TO CART
+========================================================= */
+
+function addToCart(productId) {
+
+    const product =
+        products.find(
+            item =>
+                item.id === productId
+        );
+
+
+    if (!product) {
+
+        return;
+
+    }
+
+
+    let cart = getCart();
+
+
+    const existingProduct =
+        cart.find(
+            item =>
+                item.id === productId
+        );
+
+
+    if (existingProduct) {
+
+        existingProduct.quantity =
+            Number(
+                existingProduct.quantity || 1
+            ) + 1;
+
+    } else {
+
+        cart.push({
+
+            id: product.id,
+
+            name: product.name,
+
+            price: product.price,
+
+            image: product.image,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    saveCart(cart);
+
+
+    showNotification(
+        product.name +
+        " added to cart 🛒"
+    );
+
+}
+
+
+
+/* =========================================================
+   DISPLAY PRODUCTS
+========================================================= */
+
+function displayProducts() {
+
+    let filteredProducts =
+        [...products];
+
+
+    /* CATEGORY */
+
+    if (
+        currentCategory !== "all"
+    ) {
+
+        filteredProducts =
+            filteredProducts.filter(
+                product =>
+                    product.category ===
+                    currentCategory
+            );
+
+    }
+
+
+    /* SEARCH */
+
+    if (
+        currentSearch.trim() !== ""
+    ) {
+
+        const search =
+            currentSearch
+                .toLowerCase()
+                .trim();
+
+
+        filteredProducts =
+            filteredProducts.filter(
+                product =>
+
+                    product.name
+                        .toLowerCase()
+                        .includes(search)
+
+            );
+
+    }
+
+
+    /* SORT */
+
+    if (
+        currentSort === "low"
+    ) {
+
+        filteredProducts.sort(
+            (a, b) =>
+                a.price - b.price
+        );
+
+    }
+
+
+    else if (
+        currentSort === "high"
+    ) {
+
+        filteredProducts.sort(
+            (a, b) =>
+                b.price - a.price
+        );
+
+    }
+
+
+    else if (
+        currentSort === "rating"
+    ) {
+
+        filteredProducts.sort(
+            (a, b) =>
+                b.rating - a.rating
+        );
+
+    }
+
+
+    else if (
+        currentSort === "name"
+    ) {
+
+        filteredProducts.sort(
+            (a, b) =>
+                a.name.localeCompare(
+                    b.name
+                )
+        );
+
+    }
+
+
+    const grid =
+        document.getElementById(
+            "productsGrid"
+        );
+
+
+    /* NO PRODUCTS */
+
+    if (
+        filteredProducts.length === 0
+    ) {
+
+        grid.innerHTML = `
+
+            <div class="no-products">
+
+                <div class="no-products-icon">
+                    🔍
+                </div>
+
+                <h2>
+                    No products found
+                </h2>
+
+                <p>
+                    Try another search
+                    or category.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* DISPLAY */
+
+    grid.innerHTML =
+        filteredProducts
+            .map(product => {
+
+                const wishlist =
+                    getWishlist()
+                        .includes(
+                            product.id
+                        );
+
+
+                const discount =
+                    Math.round(
+                        (
+                            (
+                                product.oldPrice -
+                                product.price
+                            )
+                            /
+                            product.oldPrice
+                        ) * 100
+                    );
+
+
+                return `
+
+                    <div class="product-card">
+
+
+                        <div
+                            class="product-image-box">
+
+
+                            <span
+                                class="sale-badge">
+
+                                ${discount}% OFF
+
+                            </span>
+
+
+                            <button
+                                class="wishlist ${
+                                    wishlist
+                                    ? "active"
+                                    : ""
+                                }"
+                                onclick="
+                                    toggleWishlist(
+                                        '${product.id}'
+                                    )
+                                ">
+
+                                ${
+                                    wishlist
+                                    ? "♥"
+                                    : "♡"
+                                }
+
+                            </button>
+
+
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                                onerror="
+                                    this.onerror=null;
+                                    this.src=
+                                    'https://via.placeholder.com/400x400?text=Image+Not+Found';
+                                "
+                            >
+
+                        </div>
+
+
+
+                        <div
+                            class="product-details">
+
+
+                            <h3>
+                                ${product.name}
+                            </h3>
+
+
+                            <div
+                                class="product-category">
+
+                                ${product.category}
+
+                            </div>
+
+
+                            <div class="rating">
+
+                                ★★★★★
+
+                                <span
+                                    style="
+                                        color:#6b7280;
+                                        margin-left:4px;
+                                    ">
+
+                                    ${product.rating}
+
+                                </span>
+
+                            </div>
+
+
+                            <div
+                                class="price-row">
+
+
+                                <span
+                                    class="price">
+
+                                    ₹${product.price
+                                        .toLocaleString(
+                                            "en-IN"
+                                        )}
+
+                                </span>
+
+
+                                <span
+                                    class="old-price">
+
+                                    ₹${product.oldPrice
+                                        .toLocaleString(
+                                            "en-IN"
+                                        )}
+
+                                </span>
+
+
+                            </div>
+
+
+                            <button
+                                class="add-cart"
+                                onclick="
+                                    addToCart(
+                                        '${product.id}'
+                                    )
+                                ">
+
+                                🛒 Add to Cart
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            })
+            .join("");
+
+}
+
+
+
+/* =========================================================
+   FILTER PRODUCTS
+========================================================= */
+
+function filterProducts(
+    category,
+    button
+) {
+
+    currentCategory =
+        category;
+
+
+    document
+        .querySelectorAll(
+            ".filter-btn"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    displayProducts();
+
+}
+
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchProducts() {
+
+    currentSearch =
+        document.getElementById(
+            "productSearch"
+        ).value;
+
+
+    displayProducts();
+
+}
+
+
+
+/* =========================================================
+   SORT
+========================================================= */
+
+function sortProducts() {
+
+    currentSort =
+        document.getElementById(
+            "sortSelect"
+        ).value;
+
+
+    displayProducts();
+
+}
+
+
+
+/* =========================================================
+   WISHLIST
+========================================================= */
+
+function getWishlist() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "shopEasyWishlist"
+            )
+        ) || [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TOGGLE WISHLIST
+========================================================= */
+
+function toggleWishlist(
+    productId
+) {
+
+    let wishlist =
+        getWishlist();
+
+
+    if (
+        wishlist.includes(
+            productId
+        )
+    ) {
+
+        wishlist =
+            wishlist.filter(
+                id =>
+                    id !== productId
+            );
+
+
+        showNotification(
+            "Removed from wishlist ❤️"
+        );
+
+    } else {
+
+        wishlist.push(
+            productId
+        );
+
+
+        showNotification(
+            "Added to wishlist ❤️"
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "shopEasyWishlist",
+        JSON.stringify(
+            wishlist
+        )
+    );
+
+
+    displayProducts();
+
+}
+
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+function showNotification(
+    message
+) {
+
+    const notification =
+        document.getElementById(
+            "notification"
+        );
+
+
+    notification.textContent =
+        message;
+
+
+    notification.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.notificationTimer
+    );
+
+
+    window.notificationTimer =
+        setTimeout(
+            function() {
+
+                notification.classList.remove(
+                    "show"
+                );
+
+            },
+            2200
+        );
+
+}
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        displayProducts();
+
+        updateCartCount();
+
+    }
+);
+
+
+</script>
+
+
+</body>
+</html>
+```

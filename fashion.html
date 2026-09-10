@@ -1,0 +1,1014 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fashion | ShopEasy</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 45px 20px 30px;
+            background: linear-gradient(135deg, #fff7ed, #fdf2f8);
+        }
+
+        .page-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .filter-section {
+            padding: 25px 20px;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            border: 1px solid #d1d5db;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #111827;
+            color: white;
+            border-color: #111827;
+        }
+
+        .products-toolbar {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus {
+            border-color: #111827;
+        }
+
+        .sort-box select {
+            padding: 13px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .products-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 20px 60px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-image-box {
+            width: 100%;
+            height: 230px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image-box img {
+            transform: scale(1.05);
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            font-size: 19px;
+            z-index: 2;
+        }
+
+        .wishlist-btn.active {
+            color: #ef4444;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-category {
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-name {
+            font-size: 17px;
+            margin: 7px 0;
+            color: #111827;
+        }
+
+        .rating {
+            font-size: 13px;
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 19px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .old-price {
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-size: 13px;
+            margin-left: 6px;
+        }
+
+        .add-cart-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 11px;
+            border: none;
+            border-radius: 8px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .add-cart-btn:hover {
+            background: #374151;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+            display: none;
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .page-header h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="logo">
+                <a href="index.html">ShopEasy</a>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="categories.html">Categories</a>
+                <a href="electronics.html">Electronics</a>
+                <a href="fashion.html" class="active">Fashion</a>
+                <a href="footwear.html">Footwear</a>
+                <a href="login.html">Account</a>
+
+                <a href="cart.html" class="cart-link">
+                    🛒 Cart
+                    <span id="cartCount" class="cart-count">0</span>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <h1>Fashion Collection</h1>
+        <p>Discover the latest styles for men, women and kids</p>
+    </section>
+
+
+    <!-- FILTERS -->
+    <section class="filter-section">
+        <div class="filter-container">
+
+            <button class="filter-btn active" data-category="all">
+                All
+            </button>
+
+            <button class="filter-btn" data-category="men">
+                Men
+            </button>
+
+            <button class="filter-btn" data-category="women">
+                Women
+            </button>
+
+            <button class="filter-btn" data-category="kids">
+                Kids
+            </button>
+
+            <button class="filter-btn" data-category="shirts">
+                Shirts
+            </button>
+
+            <button class="filter-btn" data-category="t-shirts">
+                T-Shirts
+            </button>
+
+            <button class="filter-btn" data-category="jeans">
+                Jeans
+            </button>
+
+            <button class="filter-btn" data-category="dresses">
+                Dresses
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- SEARCH + SORT -->
+    <div class="products-toolbar">
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="productSearch"
+                placeholder="Search fashion..."
+            >
+        </div>
+
+        <div class="sort-box">
+            <select id="sortSelect">
+
+                <option value="default">
+                    Sort By
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+                <option value="rating">
+                    Highest Rated
+                </option>
+
+                <option value="name">
+                    Name: A-Z
+                </option>
+
+            </select>
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        ></div>
+
+        <div
+            class="no-products"
+            id="noProducts"
+        >
+            <h2>No products found</h2>
+            <p>Try another search or category.</p>
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /* =========================
+           PRODUCT DATA
+        ========================= */
+
+        const products = [
+
+            {
+                id: "fa1",
+                name: "Classic Cotton Shirt",
+                category: "men shirts",
+                price: 1299,
+                oldPrice: 1999,
+                rating: 4.6,
+                image: "images/classic-shirt.jpg"
+            },
+
+            {
+                id: "fa2",
+                name: "Premium Casual Shirt",
+                category: "men shirts",
+                price: 1599,
+                oldPrice: 2499,
+                rating: 4.7,
+                image: "images/premium-shirt.jpg"
+            },
+
+            {
+                id: "fa3",
+                name: "Oversized Graphic T-Shirt",
+                category: "men t-shirts",
+                price: 799,
+                oldPrice: 1299,
+                rating: 4.5,
+                image: "images/oversized-tshirt.jpg"
+            },
+
+            {
+                id: "fa4",
+                name: "Classic Polo T-Shirt",
+                category: "men t-shirts",
+                price: 999,
+                oldPrice: 1599,
+                rating: 4.6,
+                image: "images/polo-tshirt.jpg"
+            },
+
+            {
+                id: "fa5",
+                name: "Slim Fit Blue Jeans",
+                category: "men jeans",
+                price: 1799,
+                oldPrice: 2999,
+                rating: 4.7,
+                image: "images/slim-jeans.jpg"
+            },
+
+            {
+                id: "fa6",
+                name: "Women's Summer Dress",
+                category: "women dresses",
+                price: 1899,
+                oldPrice: 2999,
+                rating: 4.8,
+                image: "images/summer-dress.jpg"
+            },
+
+            {
+                id: "fa7",
+                name: "Women's Premium Top",
+                category: "women shirts",
+                price: 1199,
+                oldPrice: 1899,
+                rating: 4.6,
+                image: "images/women-top.jpg"
+            },
+
+            {
+                id: "fa8",
+                name: "Women's Casual Jeans",
+                category: "women jeans",
+                price: 1699,
+                oldPrice: 2699,
+                rating: 4.7,
+                image: "images/women-jeans.jpg"
+            },
+
+            {
+                id: "fa9",
+                name: "Kids Printed T-Shirt",
+                category: "kids t-shirts",
+                price: 599,
+                oldPrice: 999,
+                rating: 4.5,
+                image: "images/kids-tshirt.jpg"
+            },
+
+            {
+                id: "fa10",
+                name: "Kids Casual Jeans",
+                category: "kids jeans",
+                price: 899,
+                oldPrice: 1399,
+                rating: 4.5,
+                image: "images/kids-jeans.jpg"
+            },
+
+            {
+                id: "fa11",
+                name: "Women's Party Dress",
+                category: "women dresses",
+                price: 2499,
+                oldPrice: 3999,
+                rating: 4.8,
+                image: "images/party-dress.jpg"
+            },
+
+            {
+                id: "fa12",
+                name: "Men's Casual Jeans",
+                category: "men jeans",
+                price: 1599,
+                oldPrice: 2499,
+                rating: 4.6,
+                image: "images/casual-jeans.jpg"
+            }
+
+        ];
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        let currentCategory = "all";
+        let searchTerm = "";
+
+
+        /* =========================
+           CART
+        ========================= */
+
+        function getCart() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        function saveCart(cart) {
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+        }
+
+
+        function updateCartCount() {
+
+            const cart = getCart();
+
+            const count = cart.reduce(
+                (total, item) =>
+                    total + Number(item.quantity || 1),
+                0
+            );
+
+            document.getElementById(
+                "cartCount"
+            ).textContent = count;
+
+        }
+
+
+        /* =========================
+           ADD TO CART
+        ========================= */
+
+        function addToCart(id) {
+
+            const product = products.find(
+                item => item.id === id
+            );
+
+            if (!product) return;
+
+            const cart = getCart();
+
+            const existing = cart.find(
+                item => item.id === id
+            );
+
+            if (existing) {
+
+                existing.quantity =
+                    Number(existing.quantity || 1) + 1;
+
+            } else {
+
+                cart.push({
+
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+
+                });
+
+            }
+
+            saveCart(cart);
+            updateCartCount();
+
+            alert(
+                product.name +
+                " added to cart!"
+            );
+
+        }
+
+
+        /* =========================
+           WISHLIST
+        ========================= */
+
+        function getWishlist() {
+
+            try {
+
+                return JSON.parse(
+                    localStorage.getItem(
+                        "shopEasyWishlist"
+                    )
+                ) || [];
+
+            } catch (error) {
+
+                return [];
+
+            }
+
+        }
+
+
+        function toggleWishlist(id, button) {
+
+            let wishlist = getWishlist();
+
+            if (wishlist.includes(id)) {
+
+                wishlist =
+                    wishlist.filter(
+                        item => item !== id
+                    );
+
+                button.classList.remove(
+                    "active"
+                );
+
+                button.innerHTML = "♡";
+
+            } else {
+
+                wishlist.push(id);
+
+                button.classList.add(
+                    "active"
+                );
+
+                button.innerHTML = "♥";
+
+            }
+
+            localStorage.setItem(
+                "shopEasyWishlist",
+                JSON.stringify(wishlist)
+            );
+
+        }
+
+
+        /* =========================
+           DISPLAY PRODUCTS
+        ========================= */
+
+        function displayProducts() {
+
+            const grid =
+                document.getElementById(
+                    "productGrid"
+                );
+
+            const noProducts =
+                document.getElementById(
+                    "noProducts"
+                );
+
+
+            let filteredProducts =
+                products.filter(product => {
+
+                    const matchesCategory =
+                        currentCategory === "all" ||
+                        product.category
+                            .toLowerCase()
+                            .includes(
+                                currentCategory
+                            );
+
+                    const matchesSearch =
+                        product.name
+                            .toLowerCase()
+                            .includes(
+                                searchTerm
+                            );
+
+                    return (
+                        matchesCategory &&
+                        matchesSearch
+                    );
+
+                });
+
+
+            /* SORT */
+
+            const sort =
+                document.getElementById(
+                    "sortSelect"
+                ).value;
+
+
+            if (sort === "low") {
+
+                filteredProducts.sort(
+                    (a, b) =>
+                        a.price - b.price
+                );
+
+            }
+
+            else if (sort === "high") {
+
+                filteredProducts.sort(
+                    (a, b) =>
+                        b.price - a.price
+                );
+
+            }
+
+            else if (sort === "rating") {
+
+                filteredProducts.sort(
+                    (a, b) =>
+                        b.rating - a.rating
+                );
+
+            }
+
+            else if (sort === "name") {
+
+                filteredProducts.sort(
+                    (a, b) =>
+                        a.name.localeCompare(
+                            b.name
+                        )
+                );
+
+            }
+
+
+            /* EMPTY STATE */
+
+            if (
+                filteredProducts.length === 0
+            ) {
+
+                grid.innerHTML = "";
+
+                noProducts.style.display =
+                    "block";
+
+                return;
+
+            }
+
+            noProducts.style.display =
+                "none";
+
+
+            const wishlist =
+                getWishlist();
+
+
+            /* RENDER PRODUCTS */
+
+            grid.innerHTML =
+                filteredProducts
+                    .map(product => {
+
+                        const isWishlisted =
+                            wishlist.includes(
+                                product.id
+                            );
+
+                        return `
+
+                            <div class="product-card">
+
+                                <div class="product-image-box">
+
+                                    <img
+                                        src="${product.image}"
+                                        alt="${product.name}"
+                                        onerror="this.src='https://via.placeholder.com/400x400?text=Image+Not+Found'"
+                                    >
+
+                                    <button
+                                        class="wishlist-btn ${
+                                            isWishlisted
+                                                ? "active"
+                                                : ""
+                                        }"
+                                        onclick="toggleWishlist(
+                                            '${product.id}',
+                                            this
+                                        )"
+                                    >
+                                        ${
+                                            isWishlisted
+                                                ? "♥"
+                                                : "♡"
+                                        }
+                                    </button>
+
+                                </div>
+
+
+                                <div class="product-info">
+
+                                    <div class="product-category">
+                                        ${
+                                            product.category
+                                                .split(" ")[1]
+                                                || "Fashion"
+                                        }
+                                    </div>
+
+
+                                    <h3 class="product-name">
+                                        ${product.name}
+                                    </h3>
+
+
+                                    <div class="rating">
+
+                                        ★★★★★
+
+                                        <span
+                                            style="color:#64748b"
+                                        >
+                                            ${product.rating}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <span class="price">
+                                            ₹${product.price.toLocaleString("en-IN")}
+                                        </span>
+
+                                        <span class="old-price">
+                                            ₹${product.oldPrice.toLocaleString("en-IN")}
+                                        </span>
+
+                                    </div>
+
+
+                                    <button
+                                        class="add-cart-btn"
+                                        onclick="addToCart(
+                                            '${product.id}'
+                                        )"
+                                    >
+                                        🛒 Add to Cart
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    })
+                    .join("");
+
+        }
+
+
+        /* =========================
+           FILTER BUTTONS
+        ========================= */
+
+        document
+            .querySelectorAll(".filter-btn")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        document
+                            .querySelectorAll(
+                                ".filter-btn"
+                            )
+                            .forEach(btn =>
+                                btn.classList.remove(
+                                    "active"
+                                )
+                            );
+
+                        this.classList.add(
+                            "active"
+                        );
+
+                        currentCategory =
+                            this.dataset.category;
+
+                        displayProducts();
+
+                    }
+                );
+
+            });
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        document
+            .getElementById(
+                "productSearch"
+            )
+            .addEventListener(
+                "input",
+                function () {
+
+                    searchTerm =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+                    displayProducts();
+
+                }
+            );
+
+
+        /* =========================
+           SORT
+        ========================= */
+
+        document
+            .getElementById(
+                "sortSelect"
+            )
+            .addEventListener(
+                "change",
+                displayProducts
+            );
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================= */
+
+        displayProducts();
+        updateCartCount();
+
+    </script>
+
+</body>
+</html>
+```

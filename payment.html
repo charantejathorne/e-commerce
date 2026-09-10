@@ -1,0 +1,1527 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment | ShopEasy</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #222;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 70px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2874f0;
+        }
+
+        .secure-label {
+            color: #159447;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* ================= HEADER ================= */
+
+        .page-header {
+            background: linear-gradient(135deg, #2874f0, #174ea6);
+            color: white;
+            padding: 38px 6%;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            opacity: 0.9;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .payment-container {
+            width: 88%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+        .payment-layout {
+            display: grid;
+            grid-template-columns: 1fr 370px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* ================= PAYMENT BOX ================= */
+
+        .payment-box,
+        .summary-box {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .payment-box {
+            padding: 25px;
+        }
+
+        .payment-box h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        /* ================= PAYMENT METHODS ================= */
+
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            margin-bottom: 13px;
+            overflow: hidden;
+        }
+
+        .method-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 17px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .method-header:hover {
+            background: #f8faff;
+        }
+
+        .method-header input {
+            accent-color: #2874f0;
+            width: 17px;
+            height: 17px;
+        }
+
+        .method-icon {
+            font-size: 24px;
+        }
+
+        .method-title {
+            flex: 1;
+        }
+
+        .method-title strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+
+        .method-title span {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .method-content {
+            display: none;
+            padding: 0 20px 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .payment-method.active .method-content {
+            display: block;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-top: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #2874f0;
+            box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.08);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* ================= UPI ================= */
+
+        .upi-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .upi-option {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 13px;
+            background: white;
+        }
+
+        .upi-option:hover {
+            border-color: #2874f0;
+        }
+
+        /* ================= CARD ================= */
+
+        .card-number {
+            letter-spacing: 1px;
+        }
+
+        .card-note {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* ================= COD ================= */
+
+        .cod-note {
+            margin-top: 17px;
+            background: #f7f9fc;
+            padding: 14px;
+            border-radius: 7px;
+            color: #555;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .summary-box {
+            padding: 25px;
+            position: sticky;
+            top: 95px;
+        }
+
+        .summary-box h2 {
+            font-size: 21px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 17px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .delivery {
+            color: #159447;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #ddd;
+            padding-top: 18px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .pay-button {
+            width: 100%;
+            border: none;
+            background: #ff9f00;
+            color: white;
+            padding: 15px;
+            border-radius: 7px;
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 23px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pay-button:hover {
+            background: #e88e00;
+        }
+
+        .pay-button:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .secure-text {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            margin-top: 14px;
+        }
+
+        /* ================= SUCCESS ================= */
+
+        .success-screen {
+            display: none;
+            min-height: 75vh;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .success-card {
+            background: white;
+            max-width: 550px;
+            width: 100%;
+            padding: 45px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .success-icon {
+            width: 85px;
+            height: 85px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #e8f7ee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .success-card h1 {
+            margin-bottom: 10px;
+        }
+
+        .success-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .order-id {
+            display: inline-block;
+            background: #f1f4f8;
+            padding: 10px 18px;
+            border-radius: 6px;
+            margin: 10px 0 22px;
+            font-weight: bold;
+        }
+
+        .home-button {
+            display: inline-block;
+            background: #2874f0;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .home-button:hover {
+            background: #1256c4;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .payment-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-box {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .secure-label {
+                font-size: 12px;
+            }
+
+            .page-header {
+                padding: 30px 5%;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .payment-container {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .payment-box,
+            .summary-box {
+                padding: 18px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            ShopEasy
+        </a>
+
+        <div class="secure-label">
+            🔒 Secure Payment
+        </div>
+
+    </nav>
+
+
+    <!-- ================= PAGE HEADER ================= -->
+
+    <section class="page-header">
+
+        <h1>Complete Your Payment</h1>
+
+        <p>
+            Choose your preferred payment method to place your order.
+        </p>
+
+    </section>
+
+
+    <!-- ================= PAYMENT AREA ================= -->
+
+    <main class="payment-container" id="paymentArea">
+
+        <div class="payment-layout">
+
+            <!-- ================= PAYMENT METHODS ================= -->
+
+            <section class="payment-box">
+
+                <h2>Choose Payment Method</h2>
+
+
+                <!-- UPI -->
+
+                <div class="payment-method active">
+
+                    <label class="method-header">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="upi"
+                            checked
+                            onchange="selectPayment('upi')"
+                        >
+
+                        <div class="method-icon">
+                            📱
+                        </div>
+
+                        <div class="method-title">
+
+                            <strong>UPI</strong>
+
+                            <span>
+                                Google Pay, PhonePe, Paytm and more
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <div class="method-content">
+
+                        <div class="form-group">
+
+                            <label for="upiId">
+                                UPI ID
+                            </label>
+
+                            <input
+                                type="text"
+                                id="upiId"
+                                placeholder="example@upi"
+                            >
+
+                        </div>
+
+
+                        <div class="upi-options">
+
+                            <button
+                                type="button"
+                                class="upi-option"
+                                onclick="setUPI('Google Pay')">
+                                GPay
+                            </button>
+
+                            <button
+                                type="button"
+                                class="upi-option"
+                                onclick="setUPI('PhonePe')">
+                                PhonePe
+                            </button>
+
+                            <button
+                                type="button"
+                                class="upi-option"
+                                onclick="setUPI('Paytm')">
+                                Paytm
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CARD -->
+
+                <div class="payment-method">
+
+                    <label class="method-header">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="card"
+                            onchange="selectPayment('card')"
+                        >
+
+                        <div class="method-icon">
+                            💳
+                        </div>
+
+                        <div class="method-title">
+
+                            <strong>Debit / Credit Card</strong>
+
+                            <span>
+                                Visa, Mastercard, RuPay and more
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <div class="method-content">
+
+                        <div class="form-group">
+
+                            <label for="cardNumber">
+                                Card Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardNumber"
+                                class="card-number"
+                                maxlength="19"
+                                placeholder="1234 5678 9012 3456"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="cardName">
+                                Name on Card
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cardName"
+                                placeholder="Enter name on card"
+                            >
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="expiry">
+                                    Expiry Date
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="expiry"
+                                    maxlength="5"
+                                    placeholder="MM/YY"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="cvv">
+                                    CVV
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="cvv"
+                                    maxlength="3"
+                                    placeholder="•••"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <p class="card-note">
+                            🔒 Your card details are protected.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NET BANKING -->
+
+                <div class="payment-method">
+
+                    <label class="method-header">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="netbanking"
+                            onchange="selectPayment('netbanking')"
+                        >
+
+                        <div class="method-icon">
+                            🏦
+                        </div>
+
+                        <div class="method-title">
+
+                            <strong>Net Banking</strong>
+
+                            <span>
+                                Pay directly from your bank account
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <div class="method-content">
+
+                        <div class="form-group">
+
+                            <label for="bank">
+                                Select Your Bank
+                            </label>
+
+                            <select id="bank">
+
+                                <option value="">
+                                    Select Bank
+                                </option>
+
+                                <option>
+                                    State Bank of India
+                                </option>
+
+                                <option>
+                                    HDFC Bank
+                                </option>
+
+                                <option>
+                                    ICICI Bank
+                                </option>
+
+                                <option>
+                                    Axis Bank
+                                </option>
+
+                                <option>
+                                    Kotak Mahindra Bank
+                                </option>
+
+                                <option>
+                                    Bank of Baroda
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COD -->
+
+                <div class="payment-method">
+
+                    <label class="method-header">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="cod"
+                            onchange="selectPayment('cod')"
+                        >
+
+                        <div class="method-icon">
+                            💵
+                        </div>
+
+                        <div class="method-title">
+
+                            <strong>Cash on Delivery</strong>
+
+                            <span>
+                                Pay when your order arrives
+                            </span>
+
+                        </div>
+
+                    </label>
+
+
+                    <div class="method-content">
+
+                        <div class="cod-note">
+
+                            📦 You can pay in cash when your order
+                            is delivered to your address.
+
+                            <br><br>
+
+                            COD may not be available for every
+                            product or location.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ORDER SUMMARY ================= -->
+
+            <aside class="summary-box">
+
+                <h2>Order Summary</h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <span id="itemCount">
+                        0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span id="subtotal">
+                        ₹0
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row delivery">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <span id="delivery">
+                        FREE
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Discount
+                    </span>
+
+                    <span id="discount">
+                        ₹0
+                    </span>
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="total">
+                        ₹0
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="pay-button"
+                    id="payButton"
+                    onclick="processPayment()">
+
+                    Pay Now
+
+                </button>
+
+
+                <div class="secure-text">
+                    🔒 Safe & Secure Payment
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= SUCCESS SCREEN ================= -->
+
+    <section
+        class="success-screen"
+        id="successScreen">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>
+                Order Placed Successfully!
+            </h1>
+
+            <p>
+                Thank you for shopping with ShopEasy.
+            </p>
+
+            <p>
+                Your order has been placed successfully
+                and will be processed shortly.
+            </p>
+
+            <div class="order-id" id="orderId">
+                Order ID: SHOP000000
+            </div>
+
+            <br>
+
+            <a
+                href="index.html"
+                class="home-button">
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ============================================
+           CART
+        ============================================ */
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("cart")
+            ) || [];
+
+
+        /* ============================================
+           DISPLAY ORDER SUMMARY
+        ============================================ */
+
+        function updateSummary() {
+
+            let subtotal = 0;
+
+            let itemCount = 0;
+
+
+            cart.forEach(item => {
+
+                const price =
+                    Number(item.price) || 0;
+
+                const quantity =
+                    Number(item.quantity) || 1;
+
+
+                subtotal +=
+                    price * quantity;
+
+
+                itemCount += quantity;
+
+            });
+
+
+            const delivery =
+                subtotal === 0
+                    ? 0
+                    : subtotal >= 999
+                        ? 0
+                        : 49;
+
+
+            /*
+                Read the discount saved by the cart page.
+                If unavailable, use zero.
+            */
+
+            let discount =
+                Number(
+                    localStorage.getItem(
+                        "shopEasyDiscount"
+                    )
+                ) || 0;
+
+
+            if (discount > subtotal) {
+                discount = subtotal;
+            }
+
+
+            const total =
+                Math.max(
+                    0,
+                    subtotal + delivery - discount
+                );
+
+
+            document.getElementById("itemCount")
+                .textContent =
+                itemCount;
+
+
+            document.getElementById("subtotal")
+                .textContent =
+                "₹" +
+                subtotal.toLocaleString("en-IN");
+
+
+            document.getElementById("delivery")
+                .textContent =
+                delivery === 0
+                    ? "FREE"
+                    : "₹" + delivery;
+
+
+            document.getElementById("discount")
+                .textContent =
+                "- ₹" +
+                discount.toLocaleString("en-IN");
+
+
+            document.getElementById("total")
+                .textContent =
+                "₹" +
+                total.toLocaleString("en-IN");
+
+
+            return total;
+
+        }
+
+
+        /* ============================================
+           SELECT PAYMENT METHOD
+        ============================================ */
+
+        function selectPayment(method) {
+
+            const methods =
+                document.querySelectorAll(
+                    ".payment-method"
+                );
+
+
+            methods.forEach(
+                item => {
+
+                    item.classList.remove("active");
+
+                }
+            );
+
+
+            const selected =
+                document.querySelector(
+                    `input[value="${method}"]`
+                );
+
+
+            if (selected) {
+
+                selected
+                    .closest(".payment-method")
+                    .classList.add("active");
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "payButton"
+                );
+
+
+            if (method === "cod") {
+
+                button.textContent =
+                    "Place Order";
+
+            } else {
+
+                button.textContent =
+                    "Pay Now";
+
+            }
+
+        }
+
+
+        /* ============================================
+           UPI BUTTONS
+        ============================================ */
+
+        function setUPI(app) {
+
+            const upi =
+                document.getElementById(
+                    "upiId"
+                );
+
+
+            if (app === "Google Pay") {
+
+                upi.placeholder =
+                    "yourname@okaxis";
+
+            }
+
+            else if (app === "PhonePe") {
+
+                upi.placeholder =
+                    "yourname@ybl";
+
+            }
+
+            else {
+
+                upi.placeholder =
+                    "yourname@paytm";
+
+            }
+
+
+            upi.focus();
+
+        }
+
+
+        /* ============================================
+           FORMAT CARD NUMBER
+        ============================================ */
+
+        document
+            .getElementById("cardNumber")
+            .addEventListener(
+                "input",
+                function() {
+
+                    let value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .substring(0, 16);
+
+
+                    value =
+                        value.replace(
+                            /(.{4})/g,
+                            "$1 "
+                        )
+                        .trim();
+
+
+                    this.value = value;
+
+                }
+            );
+
+
+        /* ============================================
+           FORMAT EXPIRY
+        ============================================ */
+
+        document
+            .getElementById("expiry")
+            .addEventListener(
+                "input",
+                function() {
+
+                    let value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .substring(0, 4);
+
+
+                    if (value.length >= 3) {
+
+                        value =
+                            value.substring(0, 2) +
+                            "/" +
+                            value.substring(2);
+
+                    }
+
+
+                    this.value = value;
+
+                }
+            );
+
+
+        /* ============================================
+           CVV ONLY NUMBERS
+        ============================================ */
+
+        document
+            .getElementById("cvv")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .substring(0, 3);
+
+                }
+            );
+
+
+        /* ============================================
+           VALIDATE PAYMENT
+        ============================================ */
+
+        function validatePayment(method) {
+
+            if (method === "upi") {
+
+                const upi =
+                    document
+                        .getElementById("upiId")
+                        .value
+                        .trim();
+
+
+                if (
+                    !upi ||
+                    !upi.includes("@")
+                ) {
+
+                    alert(
+                        "Please enter a valid UPI ID."
+                    );
+
+                    return false;
+
+                }
+
+            }
+
+
+            if (method === "card") {
+
+                const card =
+                    document
+                        .getElementById("cardNumber")
+                        .value
+                        .replace(/\s/g, "");
+
+
+                const name =
+                    document
+                        .getElementById("cardName")
+                        .value
+                        .trim();
+
+
+                const expiry =
+                    document
+                        .getElementById("expiry")
+                        .value
+                        .trim();
+
+
+                const cvv =
+                    document
+                        .getElementById("cvv")
+                        .value
+                        .trim();
+
+
+                if (card.length !== 16) {
+
+                    alert(
+                        "Please enter a valid 16-digit card number."
+                    );
+
+                    return false;
+
+                }
+
+
+                if (!name) {
+
+                    alert(
+                        "Please enter the name on the card."
+                    );
+
+                    return false;
+
+                }
+
+
+                if (!/^\d{2}\/\d{2}$/.test(expiry)) {
+
+                    alert(
+                        "Please enter a valid expiry date."
+                    );
+
+                    return false;
+
+                }
+
+
+                if (cvv.length !== 3) {
+
+                    alert(
+                        "Please enter a valid 3-digit CVV."
+                    );
+
+                    return false;
+
+                }
+
+            }
+
+
+            if (method === "netbanking") {
+
+                const bank =
+                    document
+                        .getElementById("bank")
+                        .value;
+
+
+                if (!bank) {
+
+                    alert(
+                        "Please select your bank."
+                    );
+
+                    return false;
+
+                }
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* ============================================
+           PROCESS PAYMENT
+        ============================================ */
+
+        function processPayment() {
+
+            if (cart.length === 0) {
+
+                alert(
+                    "Your cart is empty."
+                );
+
+                window.location.href =
+                    "categories.html";
+
+                return;
+
+            }
+
+
+            const selected =
+                document.querySelector(
+                    'input[name="paymentMethod"]:checked'
+                );
+
+
+            if (!selected) {
+
+                alert(
+                    "Please select a payment method."
+                );
+
+                return;
+
+            }
+
+
+            const method =
+                selected.value;
+
+
+            if (!validatePayment(method)) {
+
+                return;
+
+            }
+
+
+            const total =
+                updateSummary();
+
+
+            if (total <= 0) {
+
+                alert(
+                    "Invalid order amount."
+                );
+
+                return;
+
+            }
+
+
+            const button =
+                document.getElementById(
+                    "payButton"
+                );
+
+
+            button.disabled = true;
+
+            button.textContent =
+                method === "cod"
+                    ? "Placing Order..."
+                    : "Processing Payment...";
+
+
+            /*
+                Simulate payment processing.
+            */
+
+            setTimeout(
+                function() {
+
+                    const orderId =
+                        "SHOP" +
+                        Date.now()
+                            .toString()
+                            .slice(-8);
+
+
+                    /*
+                        Save order information.
+                    */
+
+                    const order = {
+
+                        orderId: orderId,
+
+                        items: cart,
+
+                        total: total,
+
+                        paymentMethod: method,
+
+                        date:
+                            new Date()
+                                .toISOString()
+
+                    };
+
+
+                    let orders =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "shopEasyOrders"
+                            )
+                        ) || [];
+
+
+                    orders.push(order);
+
+
+                    localStorage.setItem(
+                        "shopEasyOrders",
+                        JSON.stringify(orders)
+                    );
+
+
+                    /*
+                        Clear cart after successful order.
+                    */
+
+                    localStorage.removeItem(
+                        "cart"
+                    );
+
+
+                    localStorage.removeItem(
+                        "shopEasyDiscount"
+                    );
+
+
+                    /*
+                        Show success screen.
+                    */
+
+                    document.getElementById(
+                        "paymentArea"
+                    ).style.display = "none";
+
+
+                    document.getElementById(
+                        "successScreen"
+                    ).style.display = "flex";
+
+
+                    document.getElementById(
+                        "orderId"
+                    ).textContent =
+                        "Order ID: " +
+                        orderId;
+
+                },
+                1800
+            );
+
+        }
+
+
+        /* ============================================
+           INITIALIZE
+        ============================================ */
+
+        updateSummary();
+
+        selectPayment("upi");
+
+    </script>
+<script src="js/main.js"></script>
+</body>
+</html>
+```

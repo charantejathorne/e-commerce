@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Footwear | ShopEasy</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .page-header {
+            text-align: center;
+            padding: 45px 20px 30px;
+            background: linear-gradient(135deg, #f8fafc, #eef2ff);
+        }
+
+        .page-header h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .filter-section {
+            padding: 25px 20px;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            border: 1px solid #d1d5db;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #111827;
+            color: white;
+            border-color: #111827;
+        }
+
+        .products-toolbar {
+            max-width: 1200px;
+            margin: 25px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 13px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            border-color: #111827;
+        }
+
+        .sort-box select {
+            padding: 13px 18px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .products-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 20px 60px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-image-box {
+            width: 100%;
+            height: 230px;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image-box img {
+            transform: scale(1.05);
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            font-size: 19px;
+            z-index: 2;
+        }
+
+        .wishlist-btn.active {
+            color: #ef4444;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-category {
+            color: #64748b;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-name {
+            font-size: 17px;
+            margin: 7px 0;
+            color: #111827;
+        }
+
+        .rating {
+            font-size: 13px;
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 19px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .old-price {
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-size: 13px;
+            margin-left: 6px;
+        }
+
+        .add-cart-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 11px;
+            border: none;
+            border-radius: 8px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .add-cart-btn:hover {
+            background: #374151;
+        }
+
+        .no-products {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+            display: none;
+        }
+
+        .cart-link {
+            position: relative;
+        }
+
+        .cart-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            margin-left: 4px;
+        }
+
+        @media (max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .page-header h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="logo">
+                <a href="index.html">ShopEasy</a>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="categories.html">Categories</a>
+                <a href="electronics.html">Electronics</a>
+                <a href="fashion.html">Fashion</a>
+                <a href="footwear.html" class="active">Footwear</a>
+                <a href="login.html">Account</a>
+
+                <a href="cart.html" class="cart-link">
+                    🛒 Cart
+                    <span id="cartCount" class="cart-count">0</span>
+                </a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <h1>Footwear Collection</h1>
+        <p>Step into style with our latest footwear collection</p>
+    </section>
+
+
+    <!-- FILTERS -->
+    <section class="filter-section">
+        <div class="filter-container">
+
+            <button class="filter-btn active" data-category="all">
+                All
+            </button>
+
+            <button class="filter-btn" data-category="men">
+                Men
+            </button>
+
+            <button class="filter-btn" data-category="women">
+                Women
+            </button>
+
+            <button class="filter-btn" data-category="kids">
+                Kids
+            </button>
+
+            <button class="filter-btn" data-category="sneakers">
+                Sneakers
+            </button>
+
+            <button class="filter-btn" data-category="running">
+                Running
+            </button>
+
+            <button class="filter-btn" data-category="formal">
+                Formal
+            </button>
+
+            <button class="filter-btn" data-category="sandals">
+                Sandals
+            </button>
+
+            <button class="filter-btn" data-category="boots">
+                Boots
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- SEARCH + SORT -->
+    <div class="products-toolbar">
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="productSearch"
+                placeholder="Search footwear..."
+            >
+        </div>
+
+        <div class="sort-box">
+            <select id="sortSelect">
+                <option value="default">Sort By</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+                <option value="name">Name: A-Z</option>
+            </select>
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+    <section class="products-section">
+
+        <div class="product-grid" id="productGrid"></div>
+
+        <div class="no-products" id="noProducts">
+            <h2>No products found</h2>
+            <p>Try another search or category.</p>
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /* =========================
+           PRODUCT DATA
+        ========================= */
+
+        const products = [
+
+            {
+                id: "f1",
+                name: "Classic White Sneakers",
+                category: "men sneakers",
+                price: 1999,
+                oldPrice: 2999,
+                rating: 4.6,
+                image: "images/white-sneakers.jpg"
+            },
+
+            {
+                id: "f2",
+                name: "Women's Fashion Sneakers",
+                category: "women sneakers",
+                price: 2299,
+                oldPrice: 3499,
+                rating: 4.7,
+                image: "images/fashion-sneakers.jpg"
+            },
+
+            {
+                id: "f3",
+                name: "Men's Running Shoes",
+                category: "men running",
+                price: 2499,
+                oldPrice: 3999,
+                rating: 4.8,
+                image: "images/men-running.jpg"
+            },
+
+            {
+                id: "f4",
+                name: "Women's Running Shoes",
+                category: "women running",
+                price: 2699,
+                oldPrice: 4299,
+                rating: 4.7,
+                image: "images/women-running.jpg"
+            },
+
+            {
+                id: "f5",
+                name: "Premium Formal Shoes",
+                category: "men formal",
+                price: 2999,
+                oldPrice: 4499,
+                rating: 4.6,
+                image: "images/formal-shoes.jpg"
+            },
+
+            {
+                id: "f6",
+                name: "Women's Formal Heels",
+                category: "women formal",
+                price: 2399,
+                oldPrice: 3799,
+                rating: 4.5,
+                image: "images/formal-heels.jpg"
+            },
+
+            {
+                id: "f7",
+                name: "Comfort Casual Sandals",
+                category: "men sandals",
+                price: 1299,
+                oldPrice: 1999,
+                rating: 4.4,
+                image: "images/casual-sandals.jpg"
+            },
+
+            {
+                id: "f8",
+                name: "Women's Casual Sandals",
+                category: "women sandals",
+                price: 1499,
+                oldPrice: 2299,
+                rating: 4.6,
+                image: "images/women-sandals.jpg"
+            },
+
+            {
+                id: "f9",
+                name: "Leather Chelsea Boots",
+                category: "men boots",
+                price: 3499,
+                oldPrice: 4999,
+                rating: 4.8,
+                image: "images/chelsea-boots.jpg"
+            },
+
+            {
+                id: "f10",
+                name: "Women's Ankle Boots",
+                category: "women boots",
+                price: 3299,
+                oldPrice: 4799,
+                rating: 4.7,
+                image: "images/ankle-boots.jpg"
+            },
+
+            {
+                id: "f11",
+                name: "Kids Sport Shoes",
+                category: "kids running",
+                price: 1199,
+                oldPrice: 1799,
+                rating: 4.5,
+                image: "images/kids-sport.jpg"
+            },
+
+            {
+                id: "f12",
+                name: "Kids Casual Sneakers",
+                category: "kids sneakers",
+                price: 999,
+                oldPrice: 1499,
+                rating: 4.4,
+                image: "images/kids-sneakers.jpg"
+            },
+
+            {
+                id: "f13",
+                name: "Premium Running Sneakers",
+                category: "men running sneakers",
+                price: 3999,
+                oldPrice: 5999,
+                rating: 4.9,
+                image: "images/premium-running.jpg"
+            },
+
+            {
+                id: "f14",
+                name: "Platform Fashion Shoes",
+                category: "women sneakers",
+                price: 2799,
+                oldPrice: 4299,
+                rating: 4.6,
+                image: "images/platform-shoes.jpg"
+            }
+
+        ];
+
+
+        /* =========================
+           VARIABLES
+        ========================= */
+
+        let currentCategory = "all";
+        let searchTerm = "";
+
+
+        /* =========================
+           CART
+        ========================= */
+
+        function getCart() {
+
+            try {
+                return JSON.parse(localStorage.getItem("cart")) || [];
+            } catch (error) {
+                return [];
+            }
+
+        }
+
+
+        function saveCart(cart) {
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+        }
+
+
+        function updateCartCount() {
+
+            const cart = getCart();
+
+            const count = cart.reduce(
+                (total, item) => total + Number(item.quantity || 1),
+                0
+            );
+
+            document.getElementById("cartCount").textContent = count;
+
+        }
+
+
+        /* =========================
+           ADD TO CART
+        ========================= */
+
+        function addToCart(id) {
+
+            const product = products.find(
+                item => item.id === id
+            );
+
+            if (!product) return;
+
+            const cart = getCart();
+
+            const existing = cart.find(
+                item => item.id === id
+            );
+
+            if (existing) {
+
+                existing.quantity =
+                    Number(existing.quantity || 1) + 1;
+
+            } else {
+
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+
+            }
+
+            saveCart(cart);
+            updateCartCount();
+
+            alert(product.name + " added to cart!");
+
+        }
+
+
+        /* =========================
+           WISHLIST
+        ========================= */
+
+        function getWishlist() {
+
+            try {
+                return JSON.parse(
+                    localStorage.getItem("shopEasyWishlist")
+                ) || [];
+            } catch (error) {
+                return [];
+            }
+
+        }
+
+
+        function toggleWishlist(id, button) {
+
+            let wishlist = getWishlist();
+
+            if (wishlist.includes(id)) {
+
+                wishlist = wishlist.filter(
+                    item => item !== id
+                );
+
+                button.classList.remove("active");
+                button.innerHTML = "♡";
+
+            } else {
+
+                wishlist.push(id);
+
+                button.classList.add("active");
+                button.innerHTML = "♥";
+
+            }
+
+            localStorage.setItem(
+                "shopEasyWishlist",
+                JSON.stringify(wishlist)
+            );
+
+        }
+
+
+        /* =========================
+           DISPLAY PRODUCTS
+        ========================= */
+
+        function displayProducts() {
+
+            const grid =
+                document.getElementById("productGrid");
+
+            const noProducts =
+                document.getElementById("noProducts");
+
+            let filteredProducts =
+                products.filter(product => {
+
+                    const matchesCategory =
+                        currentCategory === "all" ||
+                        product.category
+                            .toLowerCase()
+                            .includes(currentCategory);
+
+                    const matchesSearch =
+                        product.name
+                            .toLowerCase()
+                            .includes(searchTerm);
+
+                    return (
+                        matchesCategory &&
+                        matchesSearch
+                    );
+
+                });
+
+
+            /* SORT */
+
+            const sort =
+                document.getElementById("sortSelect").value;
+
+
+            if (sort === "low") {
+
+                filteredProducts.sort(
+                    (a, b) => a.price - b.price
+                );
+
+            }
+
+            else if (sort === "high") {
+
+                filteredProducts.sort(
+                    (a, b) => b.price - a.price
+                );
+
+            }
+
+            else if (sort === "rating") {
+
+                filteredProducts.sort(
+                    (a, b) => b.rating - a.rating
+                );
+
+            }
+
+            else if (sort === "name") {
+
+                filteredProducts.sort(
+                    (a, b) =>
+                        a.name.localeCompare(b.name)
+                );
+
+            }
+
+
+            /* EMPTY STATE */
+
+            if (filteredProducts.length === 0) {
+
+                grid.innerHTML = "";
+                noProducts.style.display = "block";
+                return;
+
+            }
+
+            noProducts.style.display = "none";
+
+
+            const wishlist = getWishlist();
+
+
+            /* RENDER */
+
+            grid.innerHTML =
+                filteredProducts.map(product => {
+
+                    const isWishlisted =
+                        wishlist.includes(product.id);
+
+                    return `
+
+                        <div class="product-card">
+
+                            <div class="product-image-box">
+
+                                <img
+                                    src="${product.image}"
+                                    alt="${product.name}"
+                                    onerror="this.src='https://via.placeholder.com/400x400?text=Image+Not+Found'"
+                                >
+
+                                <button
+                                    class="wishlist-btn ${isWishlisted ? "active" : ""}"
+                                    onclick="toggleWishlist('${product.id}', this)"
+                                >
+                                    ${isWishlisted ? "♥" : "♡"}
+                                </button>
+
+                            </div>
+
+
+                            <div class="product-info">
+
+                                <div class="product-category">
+                                    ${product.category.split(" ")[1] || "Footwear"}
+                                </div>
+
+                                <h3 class="product-name">
+                                    ${product.name}
+                                </h3>
+
+                                <div class="rating">
+                                    ★★★★★
+                                    <span style="color:#64748b">
+                                        ${product.rating}
+                                    </span>
+                                </div>
+
+                                <div>
+
+                                    <span class="price">
+                                        ₹${product.price.toLocaleString("en-IN")}
+                                    </span>
+
+                                    <span class="old-price">
+                                        ₹${product.oldPrice.toLocaleString("en-IN")}
+                                    </span>
+
+                                </div>
+
+                                <button
+                                    class="add-cart-btn"
+                                    onclick="addToCart('${product.id}')"
+                                >
+                                    🛒 Add to Cart
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }).join("");
+
+        }
+
+
+        /* =========================
+           FILTER BUTTONS
+        ========================= */
+
+        document.querySelectorAll(".filter-btn")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        document
+                            .querySelectorAll(".filter-btn")
+                            .forEach(btn =>
+                                btn.classList.remove("active")
+                            );
+
+                        this.classList.add("active");
+
+                        currentCategory =
+                            this.dataset.category;
+
+                        displayProducts();
+
+                    }
+                );
+
+            });
+
+
+        /* =========================
+           SEARCH
+        ========================= */
+
+        document
+            .getElementById("productSearch")
+            .addEventListener(
+                "input",
+                function () {
+
+                    searchTerm =
+                        this.value
+                            .toLowerCase()
+                            .trim();
+
+                    displayProducts();
+
+                }
+            );
+
+
+        /* =========================
+           SORT
+        ========================= */
+
+        document
+            .getElementById("sortSelect")
+            .addEventListener(
+                "change",
+                displayProducts
+            );
+
+
+        /* =========================
+           INITIAL LOAD
+        ========================= */
+
+        displayProducts();
+        updateCartCount();
+
+    </script>
+
+</body>
+</html>
