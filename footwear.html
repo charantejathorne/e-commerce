@@ -1,14 +1,19 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Footwear | ShopEasy</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
+
         .page-header {
             text-align: center;
             padding: 45px 20px 30px;
@@ -81,6 +86,7 @@
             border-radius: 10px;
             outline: none;
             font-size: 14px;
+            box-sizing: border-box;
         }
 
         .search-box input:focus {
@@ -243,12 +249,15 @@
         }
 
         @media (max-width: 1000px) {
+
             .product-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+
         }
 
         @media (max-width: 750px) {
+
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -256,9 +265,11 @@
             .page-header h1 {
                 font-size: 30px;
             }
+
         }
 
         @media (max-width: 500px) {
+
             .product-grid {
                 grid-template-columns: 1fr;
             }
@@ -271,127 +282,230 @@
             .search-box {
                 min-width: 100%;
             }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
     <!-- NAVBAR -->
+
     <nav class="navbar">
+
         <div class="nav-container">
 
             <div class="logo">
-                <a href="index.html">ShopEasy</a>
+
+                <a href="index.html">
+                    ShopEasy
+                </a>
+
             </div>
 
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="categories.html">Categories</a>
-                <a href="electronics.html">Electronics</a>
-                <a href="fashion.html">Fashion</a>
-                <a href="footwear.html" class="active">Footwear</a>
-                <a href="login.html">Account</a>
 
-                <a href="cart.html" class="cart-link">
-                    🛒 Cart
-                    <span id="cartCount" class="cart-count">0</span>
+            <div class="nav-links">
+
+                <a href="index.html">
+                    Home
                 </a>
+
+                <a href="categories.html">
+                    Categories
+                </a>
+
+                <a href="electronics.html">
+                    Electronics
+                </a>
+
+                <a href="fashion.html">
+                    Fashion
+                </a>
+
+                <a href="footwear.html"
+                   class="active">
+                    Footwear
+                </a>
+
+                <a href="login.html">
+                    Account
+                </a>
+
+                <a href="cart.html"
+                   class="cart-link">
+
+                    🛒 Cart
+
+                    <span id="cartCount"
+                          class="cart-count">
+                        0
+                    </span>
+
+                </a>
+
             </div>
 
         </div>
+
     </nav>
 
 
+
     <!-- PAGE HEADER -->
+
     <section class="page-header">
-        <h1>Footwear Collection</h1>
-        <p>Step into style with our latest footwear collection</p>
+
+        <h1>
+            Footwear Collection
+        </h1>
+
+        <p>
+            Step into style with our latest
+            footwear collection
+        </p>
+
     </section>
 
 
+
     <!-- FILTERS -->
+
     <section class="filter-section">
+
         <div class="filter-container">
 
-            <button class="filter-btn active" data-category="all">
+            <button class="filter-btn active"
+                    data-category="all">
                 All
             </button>
 
-            <button class="filter-btn" data-category="men">
+            <button class="filter-btn"
+                    data-category="men">
                 Men
             </button>
 
-            <button class="filter-btn" data-category="women">
+            <button class="filter-btn"
+                    data-category="women">
                 Women
             </button>
 
-            <button class="filter-btn" data-category="kids">
+            <button class="filter-btn"
+                    data-category="kids">
                 Kids
             </button>
 
-            <button class="filter-btn" data-category="sneakers">
+            <button class="filter-btn"
+                    data-category="sneakers">
                 Sneakers
             </button>
 
-            <button class="filter-btn" data-category="running">
+            <button class="filter-btn"
+                    data-category="running">
                 Running
             </button>
 
-            <button class="filter-btn" data-category="formal">
+            <button class="filter-btn"
+                    data-category="formal">
                 Formal
             </button>
 
-            <button class="filter-btn" data-category="sandals">
+            <button class="filter-btn"
+                    data-category="sandals">
                 Sandals
             </button>
 
-            <button class="filter-btn" data-category="boots">
+            <button class="filter-btn"
+                    data-category="boots">
                 Boots
             </button>
 
         </div>
+
     </section>
 
 
+
     <!-- SEARCH + SORT -->
+
     <div class="products-toolbar">
 
         <div class="search-box">
+
             <input
                 type="text"
                 id="productSearch"
                 placeholder="Search footwear..."
             >
+
         </div>
 
+
         <div class="sort-box">
+
             <select id="sortSelect">
-                <option value="default">Sort By</option>
-                <option value="low">Price: Low to High</option>
-                <option value="high">Price: High to Low</option>
-                <option value="rating">Highest Rated</option>
-                <option value="name">Name: A-Z</option>
+
+                <option value="default">
+                    Sort By
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+                <option value="rating">
+                    Highest Rated
+                </option>
+
+                <option value="name">
+                    Name: A-Z
+                </option>
+
             </select>
+
         </div>
 
     </div>
 
 
+
     <!-- PRODUCTS -->
+
     <section class="products-section">
 
-        <div class="product-grid" id="productGrid"></div>
+        <div
+            class="product-grid"
+            id="productGrid">
+        </div>
 
-        <div class="no-products" id="noProducts">
-            <h2>No products found</h2>
-            <p>Try another search or category.</p>
+
+        <div
+            class="no-products"
+            id="noProducts">
+
+            <h2>
+                No products found
+            </h2>
+
+            <p>
+                Try another search or category.
+            </p>
+
         </div>
 
     </section>
 
 
+
     <script>
+
 
         /* =========================
            PRODUCT DATA
@@ -406,7 +520,7 @@
                 price: 1999,
                 oldPrice: 2999,
                 rating: 4.6,
-                image: "images/white-sneakers.jpg"
+                image: "white-sneakers.jpg"
             },
 
             {
@@ -416,7 +530,7 @@
                 price: 2299,
                 oldPrice: 3499,
                 rating: 4.7,
-                image: "images/fashion-sneakers.jpg"
+                image: "fashion-sneakers.jpg"
             },
 
             {
@@ -426,7 +540,7 @@
                 price: 2499,
                 oldPrice: 3999,
                 rating: 4.8,
-                image: "images/men-running.jpg"
+                image: "men-running.jpg"
             },
 
             {
@@ -436,7 +550,7 @@
                 price: 2699,
                 oldPrice: 4299,
                 rating: 4.7,
-                image: "images/women-running.jpg"
+                image: "women-running.jpg"
             },
 
             {
@@ -446,7 +560,7 @@
                 price: 2999,
                 oldPrice: 4499,
                 rating: 4.6,
-                image: "images/formal-shoes.jpg"
+                image: "formal-shoes.jpg"
             },
 
             {
@@ -456,7 +570,7 @@
                 price: 2399,
                 oldPrice: 3799,
                 rating: 4.5,
-                image: "images/formal-heels.jpg"
+                image: "formal-heels.jpg"
             },
 
             {
@@ -466,7 +580,7 @@
                 price: 1299,
                 oldPrice: 1999,
                 rating: 4.4,
-                image: "images/casual-sandals.jpg"
+                image: "casual-sandals.jpg"
             },
 
             {
@@ -476,7 +590,7 @@
                 price: 1499,
                 oldPrice: 2299,
                 rating: 4.6,
-                image: "images/women-sandals.jpg"
+                image: "women-sandals.jpg"
             },
 
             {
@@ -486,7 +600,7 @@
                 price: 3499,
                 oldPrice: 4999,
                 rating: 4.8,
-                image: "images/chelsea-boots.jpg"
+                image: "chelsea-boots.jpg"
             },
 
             {
@@ -496,7 +610,7 @@
                 price: 3299,
                 oldPrice: 4799,
                 rating: 4.7,
-                image: "images/ankle-boots.jpg"
+                image: "ankle-boots.jpg"
             },
 
             {
@@ -506,7 +620,7 @@
                 price: 1199,
                 oldPrice: 1799,
                 rating: 4.5,
-                image: "images/kids-sport.jpg"
+                image: "kids-sport.jpg"
             },
 
             {
@@ -516,7 +630,7 @@
                 price: 999,
                 oldPrice: 1499,
                 rating: 4.4,
-                image: "images/kids-sneakers.jpg"
+                image: "kids-sneakers.jpg"
             },
 
             {
@@ -526,7 +640,7 @@
                 price: 3999,
                 oldPrice: 5999,
                 rating: 4.9,
-                image: "images/premium-running.jpg"
+                image: "premium-running.jpg"
             },
 
             {
@@ -536,10 +650,11 @@
                 price: 2799,
                 oldPrice: 4299,
                 rating: 4.6,
-                image: "images/platform-shoes.jpg"
+                image: "platform-shoes.jpg"
             }
 
         ];
+
 
 
         /* =========================
@@ -547,7 +662,9 @@
         ========================= */
 
         let currentCategory = "all";
+
         let searchTerm = "";
+
 
 
         /* =========================
@@ -557,9 +674,17 @@
         function getCart() {
 
             try {
-                return JSON.parse(localStorage.getItem("cart")) || [];
-            } catch (error) {
+
+                return JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+            }
+
+            catch (error) {
+
                 return [];
+
             }
 
         }
@@ -580,13 +705,18 @@
             const cart = getCart();
 
             const count = cart.reduce(
-                (total, item) => total + Number(item.quantity || 1),
+                (total, item) =>
+                    total +
+                    Number(item.quantity || 1),
                 0
             );
 
-            document.getElementById("cartCount").textContent = count;
+            document.getElementById(
+                "cartCount"
+            ).textContent = count;
 
         }
+
 
 
         /* =========================
@@ -595,41 +725,60 @@
 
         function addToCart(id) {
 
-            const product = products.find(
-                item => item.id === id
-            );
+            const product =
+                products.find(
+                    item => item.id === id
+                );
 
             if (!product) return;
 
             const cart = getCart();
 
-            const existing = cart.find(
-                item => item.id === id
-            );
+            const existing =
+                cart.find(
+                    item => item.id === id
+                );
+
 
             if (existing) {
 
                 existing.quantity =
-                    Number(existing.quantity || 1) + 1;
+                    Number(
+                        existing.quantity || 1
+                    ) + 1;
 
-            } else {
+            }
+
+            else {
 
                 cart.push({
+
                     id: product.id,
+
                     name: product.name,
+
                     price: product.price,
+
                     image: product.image,
+
                     quantity: 1
+
                 });
 
             }
 
+
             saveCart(cart);
+
             updateCartCount();
 
-            alert(product.name + " added to cart!");
+            alert(
+                product.name +
+                " added to cart!"
+            );
 
         }
+
 
 
         /* =========================
@@ -639,37 +788,62 @@
         function getWishlist() {
 
             try {
+
                 return JSON.parse(
-                    localStorage.getItem("shopEasyWishlist")
+                    localStorage.getItem(
+                        "shopEasyWishlist"
+                    )
                 ) || [];
-            } catch (error) {
+
+            }
+
+            catch (error) {
+
                 return [];
+
             }
 
         }
 
 
-        function toggleWishlist(id, button) {
+        function toggleWishlist(
+            id,
+            button
+        ) {
 
-            let wishlist = getWishlist();
+            let wishlist =
+                getWishlist();
 
-            if (wishlist.includes(id)) {
 
-                wishlist = wishlist.filter(
-                    item => item !== id
+            if (
+                wishlist.includes(id)
+            ) {
+
+                wishlist =
+                    wishlist.filter(
+                        item => item !== id
+                    );
+
+                button.classList.remove(
+                    "active"
                 );
 
-                button.classList.remove("active");
                 button.innerHTML = "♡";
 
-            } else {
+            }
+
+            else {
 
                 wishlist.push(id);
 
-                button.classList.add("active");
+                button.classList.add(
+                    "active"
+                );
+
                 button.innerHTML = "♥";
 
             }
+
 
             localStorage.setItem(
                 "shopEasyWishlist",
@@ -679,6 +853,7 @@
         }
 
 
+
         /* =========================
            DISPLAY PRODUCTS
         ========================= */
@@ -686,43 +861,59 @@
         function displayProducts() {
 
             const grid =
-                document.getElementById("productGrid");
+                document.getElementById(
+                    "productGrid"
+                );
 
             const noProducts =
-                document.getElementById("noProducts");
+                document.getElementById(
+                    "noProducts"
+                );
+
 
             let filteredProducts =
-                products.filter(product => {
+                products.filter(
+                    product => {
 
-                    const matchesCategory =
-                        currentCategory === "all" ||
-                        product.category
-                            .toLowerCase()
-                            .includes(currentCategory);
+                        const matchesCategory =
+                            currentCategory === "all" ||
+                            product.category
+                                .toLowerCase()
+                                .includes(
+                                    currentCategory
+                                );
 
-                    const matchesSearch =
-                        product.name
-                            .toLowerCase()
-                            .includes(searchTerm);
 
-                    return (
-                        matchesCategory &&
-                        matchesSearch
-                    );
+                        const matchesSearch =
+                            product.name
+                                .toLowerCase()
+                                .includes(
+                                    searchTerm
+                                );
 
-                });
+
+                        return (
+                            matchesCategory &&
+                            matchesSearch
+                        );
+
+                    }
+                );
 
 
             /* SORT */
 
             const sort =
-                document.getElementById("sortSelect").value;
+                document.getElementById(
+                    "sortSelect"
+                ).value;
 
 
             if (sort === "low") {
 
                 filteredProducts.sort(
-                    (a, b) => a.price - b.price
+                    (a, b) =>
+                        a.price - b.price
                 );
 
             }
@@ -730,7 +921,8 @@
             else if (sort === "high") {
 
                 filteredProducts.sort(
-                    (a, b) => b.price - a.price
+                    (a, b) =>
+                        b.price - a.price
                 );
 
             }
@@ -738,7 +930,8 @@
             else if (sort === "rating") {
 
                 filteredProducts.sort(
-                    (a, b) => b.rating - a.rating
+                    (a, b) =>
+                        b.rating - a.rating
                 );
 
             }
@@ -747,133 +940,209 @@
 
                 filteredProducts.sort(
                     (a, b) =>
-                        a.name.localeCompare(b.name)
+                        a.name.localeCompare(
+                            b.name
+                        )
                 );
 
             }
 
 
+
             /* EMPTY STATE */
 
-            if (filteredProducts.length === 0) {
+            if (
+                filteredProducts.length === 0
+            ) {
 
                 grid.innerHTML = "";
-                noProducts.style.display = "block";
+
+                noProducts.style.display =
+                    "block";
+
                 return;
 
             }
 
-            noProducts.style.display = "none";
+
+            noProducts.style.display =
+                "none";
 
 
-            const wishlist = getWishlist();
+            const wishlist =
+                getWishlist();
 
 
-            /* RENDER */
+
+            /* RENDER PRODUCTS */
 
             grid.innerHTML =
-                filteredProducts.map(product => {
+                filteredProducts
+                    .map(
+                        product => {
 
-                    const isWishlisted =
-                        wishlist.includes(product.id);
-
-                    return `
-
-                        <div class="product-card">
-
-                            <div class="product-image-box">
-
-                                <img
-                                    src="${product.image}"
-                                    alt="${product.name}"
-                                    onerror="this.src='https://via.placeholder.com/400x400?text=Image+Not+Found'"
-                                >
-
-                                <button
-                                    class="wishlist-btn ${isWishlisted ? "active" : ""}"
-                                    onclick="toggleWishlist('${product.id}', this)"
-                                >
-                                    ${isWishlisted ? "♥" : "♡"}
-                                </button>
-
-                            </div>
+                            const isWishlisted =
+                                wishlist.includes(
+                                    product.id
+                                );
 
 
-                            <div class="product-info">
+                            return `
 
-                                <div class="product-category">
-                                    ${product.category.split(" ")[1] || "Footwear"}
+                                <div class="product-card">
+
+                                    <div class="product-image-box">
+
+                                        <img
+                                            src="${product.image}"
+                                            alt="${product.name}"
+                                            onerror="
+                                                this.src='https://via.placeholder.com/400x400?text=Image+Not+Found'
+                                            "
+                                        >
+
+
+                                        <button
+                                            class="wishlist-btn ${
+                                                isWishlisted
+                                                    ? "active"
+                                                    : ""
+                                            }"
+                                            onclick="
+                                                toggleWishlist(
+                                                    '${product.id}',
+                                                    this
+                                                )
+                                            "
+                                        >
+
+                                            ${
+                                                isWishlisted
+                                                    ? "♥"
+                                                    : "♡"
+                                            }
+
+                                        </button>
+
+                                    </div>
+
+
+
+                                    <div class="product-info">
+
+                                        <div class="product-category">
+                                            ${product.category}
+                                        </div>
+
+
+                                        <h3 class="product-name">
+                                            ${product.name}
+                                        </h3>
+
+
+                                        <div class="rating">
+
+                                            ★★★★★
+
+                                            <span
+                                                style="color:#64748b"
+                                            >
+                                                ${product.rating}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <span class="price">
+
+                                                ₹${product.price.toLocaleString("en-IN")}
+
+                                            </span>
+
+
+                                            <span class="old-price">
+
+                                                ₹${product.oldPrice.toLocaleString("en-IN")}
+
+                                            </span>
+
+                                        </div>
+
+
+                                        <button
+                                            class="add-cart-btn"
+                                            onclick="
+                                                addToCart(
+                                                    '${product.id}'
+                                                )
+                                            "
+                                        >
+
+                                            🛒 Add to Cart
+
+                                        </button>
+
+                                    </div>
+
                                 </div>
 
-                                <h3 class="product-name">
-                                    ${product.name}
-                                </h3>
+                            `;
 
-                                <div class="rating">
-                                    ★★★★★
-                                    <span style="color:#64748b">
-                                        ${product.rating}
-                                    </span>
-                                </div>
-
-                                <div>
-
-                                    <span class="price">
-                                        ₹${product.price.toLocaleString("en-IN")}
-                                    </span>
-
-                                    <span class="old-price">
-                                        ₹${product.oldPrice.toLocaleString("en-IN")}
-                                    </span>
-
-                                </div>
-
-                                <button
-                                    class="add-cart-btn"
-                                    onclick="addToCart('${product.id}')"
-                                >
-                                    🛒 Add to Cart
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    `;
-
-                }).join("");
+                        }
+                    )
+                    .join("");
 
         }
+
 
 
         /* =========================
            FILTER BUTTONS
         ========================= */
 
-        document.querySelectorAll(".filter-btn")
-            .forEach(button => {
+        document
+            .querySelectorAll(
+                ".filter-btn"
+            )
+            .forEach(
+                button => {
 
-                button.addEventListener(
-                    "click",
-                    function () {
+                    button.addEventListener(
+                        "click",
+                        function () {
 
-                        document
-                            .querySelectorAll(".filter-btn")
-                            .forEach(btn =>
-                                btn.classList.remove("active")
+                            document
+                                .querySelectorAll(
+                                    ".filter-btn"
+                                )
+                                .forEach(
+                                    btn =>
+                                        btn.classList
+                                            .remove(
+                                                "active"
+                                            )
+                                );
+
+
+                            this.classList.add(
+                                "active"
                             );
 
-                        this.classList.add("active");
 
-                        currentCategory =
-                            this.dataset.category;
+                            currentCategory =
+                                this.dataset.category;
 
-                        displayProducts();
 
-                    }
-                );
+                            displayProducts();
 
-            });
+                        }
+                    );
+
+                }
+            );
+
 
 
         /* =========================
@@ -881,7 +1150,9 @@
         ========================= */
 
         document
-            .getElementById("productSearch")
+            .getElementById(
+                "productSearch"
+            )
             .addEventListener(
                 "input",
                 function () {
@@ -891,10 +1162,12 @@
                             .toLowerCase()
                             .trim();
 
+
                     displayProducts();
 
                 }
             );
+
 
 
         /* =========================
@@ -902,11 +1175,14 @@
         ========================= */
 
         document
-            .getElementById("sortSelect")
+            .getElementById(
+                "sortSelect"
+            )
             .addEventListener(
                 "change",
                 displayProducts
             );
+
 
 
         /* =========================
@@ -914,9 +1190,11 @@
         ========================= */
 
         displayProducts();
+
         updateCartCount();
 
     </script>
 
 </body>
 </html>
+```
