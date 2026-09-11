@@ -1,18 +1,25 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Create Account | ShopEasy</title>
 
+
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -21,9 +28,11 @@
             color: #222;
         }
 
+
         a {
             text-decoration: none;
         }
+
 
         /* ================= NAVBAR ================= */
 
@@ -37,11 +46,13 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.12);
         }
 
+
         .logo {
             font-size: 28px;
             font-weight: bold;
             color: #2874f0;
         }
+
 
         .back-home {
             color: #333;
@@ -49,9 +60,11 @@
             font-weight: 600;
         }
 
+
         .back-home:hover {
             color: #2874f0;
         }
+
 
         /* ================= REGISTER AREA ================= */
 
@@ -63,6 +76,7 @@
             padding: 40px 20px;
         }
 
+
         .register-card {
             width: 100%;
             max-width: 480px;
@@ -72,10 +86,12 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.20);
         }
 
+
         .register-header {
             text-align: center;
             margin-bottom: 28px;
         }
+
 
         .register-icon {
             width: 65px;
@@ -89,15 +105,18 @@
             font-size: 30px;
         }
 
+
         .register-header h1 {
             font-size: 27px;
             margin-bottom: 8px;
         }
 
+
         .register-header p {
             color: #777;
             font-size: 14px;
         }
+
 
         /* ================= FORM ================= */
 
@@ -105,12 +124,14 @@
             margin-bottom: 18px;
         }
 
+
         .form-group label {
             display: block;
             font-size: 14px;
             font-weight: bold;
             margin-bottom: 7px;
         }
+
 
         .form-group input {
             width: 100%;
@@ -122,10 +143,12 @@
             transition: 0.3s;
         }
 
+
         .form-group input:focus {
             border-color: #2874f0;
             box-shadow: 0 0 0 3px rgba(40,116,240,0.10);
         }
+
 
         /* ================= PASSWORD ================= */
 
@@ -133,9 +156,11 @@
             position: relative;
         }
 
+
         .password-wrapper input {
             padding-right: 50px;
         }
+
 
         .show-password {
             position: absolute;
@@ -148,6 +173,7 @@
             cursor: pointer;
         }
 
+
         .password-strength {
             height: 5px;
             width: 100%;
@@ -157,17 +183,20 @@
             overflow: hidden;
         }
 
+
         .strength-bar {
             height: 100%;
             width: 0;
             transition: 0.3s;
         }
 
+
         .strength-text {
             font-size: 12px;
             margin-top: 5px;
             color: #777;
         }
+
 
         /* ================= TERMS ================= */
 
@@ -181,15 +210,18 @@
             line-height: 1.5;
         }
 
+
         .terms input {
             margin-top: 3px;
             cursor: pointer;
         }
 
+
         .terms a {
             color: #2874f0;
             font-weight: bold;
         }
+
 
         /* ================= BUTTON ================= */
 
@@ -206,9 +238,11 @@
             transition: 0.3s;
         }
 
+
         .register-btn:hover {
             background: #1256c4;
         }
+
 
         /* ================= MESSAGE ================= */
 
@@ -221,15 +255,18 @@
             text-align: center;
         }
 
+
         .success {
             background: #e8f7ee;
             color: #15803d;
         }
 
+
         .error {
             background: #fdecec;
             color: #d32f2f;
         }
+
 
         /* ================= LOGIN ================= */
 
@@ -240,10 +277,12 @@
             color: #666;
         }
 
+
         .login-text a {
             color: #2874f0;
             font-weight: bold;
         }
+
 
         /* ================= DIVIDER ================= */
 
@@ -256,6 +295,7 @@
             font-size: 12px;
         }
 
+
         .divider::before,
         .divider::after {
             content: "";
@@ -263,6 +303,7 @@
             height: 1px;
             background: #ddd;
         }
+
 
         /* ================= RESPONSIVE ================= */
 
@@ -272,26 +313,35 @@
                 padding: 0 5%;
             }
 
+
             .logo {
                 font-size: 23px;
             }
+
 
             .register-wrapper {
                 padding: 25px 15px;
             }
 
+
             .register-card {
                 padding: 25px 20px;
             }
 
+
             .register-header h1 {
                 font-size: 24px;
             }
+
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
     <!-- ================= NAVBAR ================= -->
 
@@ -301,11 +351,13 @@
             ShopEasy
         </a>
 
+
         <a href="index.html" class="back-home">
             ← Back to Home
         </a>
 
     </nav>
+
 
 
     <!-- ================= REGISTRATION ================= -->
@@ -314,13 +366,18 @@
 
         <div class="register-card">
 
+
             <div class="register-header">
 
                 <div class="register-icon">
                     👤
                 </div>
 
-                <h1>Create Your Account</h1>
+
+                <h1>
+                    Create Your Account
+                </h1>
+
 
                 <p>
                     Join ShopEasy and start shopping today
@@ -329,14 +386,20 @@
             </div>
 
 
+
             <!-- MESSAGE -->
 
-            <div id="message" class="message"></div>
+            <div
+                id="message"
+                class="message">
+            </div>
+
 
 
             <!-- FORM -->
 
             <form id="registrationForm">
+
 
                 <!-- FULL NAME -->
 
@@ -346,14 +409,15 @@
                         Full Name
                     </label>
 
+
                     <input
                         type="text"
                         id="name"
                         placeholder="Enter your full name"
-                        required
-                    >
+                        required>
 
                 </div>
+
 
 
                 <!-- EMAIL -->
@@ -364,14 +428,15 @@
                         Email Address
                     </label>
 
+
                     <input
                         type="email"
                         id="email"
                         placeholder="Enter your email"
-                        required
-                    >
+                        required>
 
                 </div>
+
 
 
                 <!-- PHONE -->
@@ -382,15 +447,16 @@
                         Mobile Number
                     </label>
 
+
                     <input
                         type="tel"
                         id="phone"
                         placeholder="Enter 10-digit mobile number"
                         maxlength="10"
-                        required
-                    >
+                        required>
 
                 </div>
+
 
 
                 <!-- PASSWORD -->
@@ -401,14 +467,15 @@
                         Password
                     </label>
 
+
                     <div class="password-wrapper">
 
                         <input
                             type="password"
                             id="password"
                             placeholder="Create a password"
-                            required
-                        >
+                            required>
+
 
                         <button
                             type="button"
@@ -420,20 +487,27 @@
                     </div>
 
 
+
                     <div class="password-strength">
+
                         <div
                             class="strength-bar"
                             id="strengthBar">
                         </div>
+
                     </div>
+
 
                     <div
                         class="strength-text"
                         id="strengthText">
+
                         Password strength
+
                     </div>
 
                 </div>
+
 
 
                 <!-- CONFIRM PASSWORD -->
@@ -444,14 +518,15 @@
                         Confirm Password
                     </label>
 
+
                     <div class="password-wrapper">
 
                         <input
                             type="password"
                             id="confirmPassword"
                             placeholder="Re-enter your password"
-                            required
-                        >
+                            required>
+
 
                         <button
                             type="button"
@@ -465,6 +540,7 @@
                 </div>
 
 
+
                 <!-- TERMS -->
 
                 <div class="terms">
@@ -472,17 +548,27 @@
                     <input
                         type="checkbox"
                         id="terms"
-                        required
-                    >
+                        required>
+
 
                     <label for="terms">
+
                         I agree to the
-                        <a href="#">Terms & Conditions</a>
+
+                        <a href="#">
+                            Terms & Conditions
+                        </a>
+
                         and
-                        <a href="#">Privacy Policy</a>.
+
+                        <a href="#">
+                            Privacy Policy
+                        </a>.
+
                     </label>
 
                 </div>
+
 
 
                 <!-- REGISTER -->
@@ -490,10 +576,13 @@
                 <button
                     type="submit"
                     class="register-btn">
+
                     Create Account
+
                 </button>
 
             </form>
+
 
 
             <!-- DIVIDER -->
@@ -501,6 +590,7 @@
             <div class="divider">
                 OR
             </div>
+
 
 
             <!-- LOGIN -->
@@ -520,6 +610,7 @@
     </main>
 
 
+
     <!-- ================= JAVASCRIPT ================= -->
 
     <script>
@@ -532,6 +623,7 @@
 
             const input =
                 document.getElementById(inputId);
+
 
             if (input.type === "password") {
 
@@ -550,12 +642,14 @@
         }
 
 
+
         /* ============================================
            PASSWORD STRENGTH
         ============================================ */
 
         const passwordInput =
             document.getElementById("password");
+
 
         passwordInput.addEventListener(
             "input",
@@ -564,8 +658,10 @@
                 const password =
                     this.value;
 
+
                 const strengthBar =
                     document.getElementById("strengthBar");
+
 
                 const strengthText =
                     document.getElementById("strengthText");
@@ -578,13 +674,16 @@
                     strength++;
                 }
 
+
                 if (/[A-Z]/.test(password)) {
                     strength++;
                 }
 
+
                 if (/[0-9]/.test(password)) {
                     strength++;
                 }
+
 
                 if (/[^A-Za-z0-9]/.test(password)) {
                     strength++;
@@ -640,6 +739,7 @@
         );
 
 
+
         /* ============================================
            REGISTRATION
         ============================================ */
@@ -691,11 +791,6 @@
                         document
                             .getElementById("terms")
                             .checked;
-
-
-                    const message =
-                        document
-                            .getElementById("message");
 
 
                     /* =================================
@@ -757,14 +852,27 @@
                     }
 
 
+
                     /* =================================
                        CHECK EXISTING USER
                     ================================= */
 
-                    const existingUser =
-                        JSON.parse(
-                            localStorage.getItem("shopEasyUser")
-                        );
+                    let existingUser = null;
+
+                    try {
+
+                        existingUser =
+                            JSON.parse(
+                                localStorage.getItem(
+                                    "shopEasyUser"
+                                )
+                            );
+
+                    } catch (error) {
+
+                        existingUser = null;
+
+                    }
 
 
                     if (
@@ -779,6 +887,7 @@
 
                         return;
                     }
+
 
 
                     /* =================================
@@ -805,6 +914,7 @@
                         "shopEasyUser",
                         JSON.stringify(user)
                     );
+
 
 
                     /* =================================
@@ -836,6 +946,7 @@
             );
 
 
+
         /* ============================================
            SHOW MESSAGE
         ============================================ */
@@ -848,13 +959,16 @@
 
             message.textContent = text;
 
+
             message.className =
                 "message " + type;
+
 
             message.style.display =
                 "block";
 
         }
+
 
 
         /* ============================================
@@ -878,7 +992,13 @@
             );
 
     </script>
-<script src="js/main.js"></script>
+
+
+    <!-- MAIN JAVASCRIPT -->
+
+    <script src="main.js"></script>
+
 </body>
+
 </html>
 ```
